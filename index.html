@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Speech Detection Color Background</title>
+
+</head>
+<body>
+
+  <h1> Speech background color changer</h1>
+  <h2>Instructions</h2>
+  <p>Hit the button and say one of those colors outloud to change the background color:Orange, Magenta, Lime, Green, Black, Red</p>
+  <button id="btn">Speak</button>
+
+<script>
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  const recognition = new SpeechRecognition();
+
+  recognition.interimResults = true ;
+
+  // If transcript gives a color, change body color
+
+  recognition.addEventListener("result", function(e) {
+      let transcript = event.results[0][0].transcript;
+      console.log(transcript);
+      let colors = ["orange","magenta","lime","green","black","red"];
+      for (i=0; i < colors.length; i++) {
+          let checkColor = colors[i];
+          if (transcript.includes(checkColor)) {
+          document.querySelector("body").style.background = checkColor;
+      }
+
+      }
+
+  });
+
+  // When button is cliked start recognition
+
+document.querySelector("#btn").addEventListener("click", function() {
+    recognition.start();
+});
+
+
+
+</script>
+
+
+  <style>
+    html {
+      font-size: 10px;
+    }
+
+    body {
+      background:white;
+      transition: background 2s;
+      font-family: 'helvetica neue';
+      font-weight: 200;
+      font-size: 20px;
+    }
+      h1, h2 {
+          text-align: center;
+      }
+      p {
+          text-align: center;
+      }
+      #btn {
+    position: relative;
+    left: 47%;
+	-moz-box-shadow:inset 0px 1px 0px 0px #fbafe3;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fbafe3;
+	box-shadow:inset 0px 1px 0px 0px #fbafe3;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ff5bb0), color-stop(1, #ef027d));
+	background:-moz-linear-gradient(top, #ff5bb0 5%, #ef027d 100%);
+	background:-webkit-linear-gradient(top, #ff5bb0 5%, #ef027d 100%);
+	background:-o-linear-gradient(top, #ff5bb0 5%, #ef027d 100%);
+	background:-ms-linear-gradient(top, #ff5bb0 5%, #ef027d 100%);
+	background:linear-gradient(to bottom, #ff5bb0 5%, #ef027d 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bb0', endColorstr='#ef027d',GradientType=0);
+	background-color:#ff5bb0;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #ee1eb5;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #c70067;
+}
+.#btn:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ef027d), color-stop(1, #ff5bb0));
+	background:-moz-linear-gradient(top, #ef027d 5%, #ff5bb0 100%);
+	background:-webkit-linear-gradient(top, #ef027d 5%, #ff5bb0 100%);
+	background:-o-linear-gradient(top, #ef027d 5%, #ff5bb0 100%);
+	background:-ms-linear-gradient(top, #ef027d 5%, #ff5bb0 100%);
+	background:linear-gradient(to bottom, #ef027d 5%, #ff5bb0 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ef027d', endColorstr='#ff5bb0',GradientType=0);
+	background-color:#ef027d;
+}
+#btn:active {
+	position:relative;
+	top:1px;
+}
+  </style>
+
+</body>
+</html>
